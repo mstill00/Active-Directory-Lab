@@ -64,6 +64,8 @@ OU hierarchies:<br>
   - Sales (OU)
     - psmit01 (Domain User)
   - IT (OU)
+    - Admins (OU)
+      - mstil01-admin
     - mstil01 (Domain User)
 - Arasaka Groups (OU)
   - HR-Users (Global Security Group)
@@ -79,7 +81,7 @@ OU hierarchies:<br>
   - IT-Share-RW (Domain Local Security Group)
     - IT-Users (Group Member)
   - DHCP-Admins* (Universal Security Group)
-    - mstil01 (Group Member)
+    - mstil01-admin (Group Member)
 - Arasaka Computers (OU)
   - Servers (OU)
     - NC-DHCP-01* (Domain Computer)
