@@ -11,9 +11,9 @@ This Active Directory lab seeks to emulate the management of a domain and domain
 - Planned and documented a /28 local area network for VMs that will be a part of the domain using subnetting.
 - Installed the Active Directory Domain Services (AD DS) and Domain Name System (DNS) server roles on the domain controller using Server Manager.
 - Promoted a domain controller using Server Manager.
-- Planned and implemented several Organizational Unit (OU) hierarchies to organize Active Directory Objects using Active Directory Administrative Center (ADAC) and Active Directory Users and Computers (ADUC).
+- Planned, documented, and implemented several Organizational Unit (OU) hierarchies to organize Active Directory Objects using Active Directory Administrative Center (ADAC) and Active Directory Users and Computers (ADUC).
 - Created and managed Active Directory Objects (Domain Users, Security Groups, OUs, Computers) within the OU hierarchies using ADAC and ADUC.
-- Domain-joined several Windows 10 VMs.
+- Joined several Windows 10 VMs to the domain.
 
 ### Tools Used
 
@@ -101,6 +101,27 @@ These manual configurations include:
 - An IPv4 subnet mask.
 - An IPv4 gateway.
 - An IPv4 DNS server pointing to itself (192.168.40.66) or the loopback address (127.0.0.1).
+  - This is stated as a best practice by Microsoft. "If the server is the first and only domain controller that you install in the domain, and the server runs DNS, configure the DNS client settings to point to that first server's IP address" (Microsoft, n.d.).
 <img width="301" height="178" alt="AD_Lab_IMG_1" src="https://github.com/user-attachments/assets/ed3510d3-f576-45a3-b70b-f8db0d07cb98" />
 
+Next, I changed the hostname to dc01 within Server Manager.
+- Changing the server's hostnam post-promotion requires either demoting and re-promoting the server or using netdom in the command prompt. 
 
+Once these pre-promotion tasks were complete, the Active Directory Domain Services and DNS server roles were ready to be installed.<br>
+<img width="250" height="119" alt="AD_Lab_IMG_3" src="https://github.com/user-attachments/assets/759afdc0-c37e-4904-bac5-bab893b3312c" /><br><img width="284" height="226" alt="AD_Lab_IMG_7" src="https://github.com/user-attachments/assets/c67c5bf4-b395-49b8-b0a1-c08892749961" />
+
+
+After installing the roles, the domain controller was promoted.<br>
+<img width="169" height="80" alt="AD_Lab_IMG_4" src="https://github.com/user-attachments/assets/bf2963b3-1de7-4976-b5ef-e9931c878baa" /><br><img width="378" height="149" alt="AD_Lab_IMG_6" src="https://github.com/user-attachments/assets/d91c28ba-a633-4566-b922-46a984f53d8a" /><br>
+Although the above image shows me using the root domain name "arasaka.example", I ended up having to revert the server VM to a pre-promotion snapshot and change the top-level domain to ".internal". See the <a href="https://github.com/mstill00/Active-Directory-Lab/edit/main/README.md#lessons-learned">Lessons Learned</a> section for more details.
+
+
+
+## Lessons Learned
+
+- Do not use .example as the top-level domain (TLD). This TLD caused major issues with the creation of forward lookup zone records upon installing the DNS server role on the domain controller.
+  - Solution: Use .internal or .com as the TLD.
+
+## Sources
+
+Microsoft. (n.d.). *Best practices for DNS client settings in Windows Server.* Microsoft Learn. Retrieved October 28, 2026, from https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/best-practices-for-dns-client-settings
