@@ -90,5 +90,17 @@ OU hierarchies:<br>
 
 \*Created as a part of the DHCP lab.
 
+- I installed one instance of Windows Server 2022 desktop edition (dc01) to act as the domain controller and DNS server.
+- I installed two instances of Windows 10 Pro (NC-HR-01, NC-Sales-01) that will be joined to the domain. 
+
 ## Steps
+
+After setting up the operating systems in VirtualBox, the first step will be to sign into the Windows Server 2022 VM and configure the IP address information from the planned network.
+These manual configurations include:
+- An IPv4 address for the Server.
+- An IPv4 subnet mask.
+- An IPv4 gateway.
+- An IPv4 DNS server pointing to itself (192.168.40.66) or the loopback address (127.0.0.1).
+<img width="301" height="178" alt="AD_Lab_IMG_1" src="https://github.com/user-attachments/assets/ed3510d3-f576-45a3-b70b-f8db0d07cb98" />
+
 
